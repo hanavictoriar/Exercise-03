@@ -1,62 +1,82 @@
-import React from 'react';
-import { View, Text, Image, TextInput, ScrollView, StyleSheet } from 'react-native';
-import programmersImage from './assets/programmers.jpeg';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-const AboutMeComponent = () => {
+const App = () => {
+  const [count, setCount] = useState(0);
+  const onPress = () => setCount(prevCount => prevCount + 1);
+
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Image
-        source={programmersImage}
-        style={{width: 200, height: 200}}
-      />
-      <Text style={styles.name}>Welcome</Text>
-      <Text style={styles.bio}>Basic Components in React Native</Text>
+    <View style={styles.container}>
+      <Text style={styles.welcomeText}>Welcome</Text>
+      <Text style={styles.usernameText}>Username</Text>
       <TextInput
-        placeholder="Say something to me..."
-        style={styles.textInput}
+        style={styles.input}
+        placeholder="Masukkan username anda"
+        onChangeText={text => console.log(text)}
       />
-      <View style={styles.footer}>
-        <Text>Contact: hana.rantelinggi@gmail.com</Text>
-      </View>
-    </ScrollView>
+      <Text style={styles.passwordText}>Password</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Masukkan password anda"
+        secureTextEntry={true}
+        onChangeText={text => console.log(text)}
+      />
+      <TouchableOpacity style={styles.button} onPress={onPress}>
+      <Text style={styles.signInText}>Sign In</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: 10,
+  },
+  button: {
     alignItems: 'center',
-    padding: 20,
-    backgroundColor:'#a87d32',
+    backgroundColor: '#fc5e03',
+    marginTop: 50,
+    padding: 15,
+    margin: 15,
+    borderRadius: 12,
   },
-  profileImage: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    marginVertical: 20,
-  },
-  name: {
-    fontFamily: 'Times New Roman',
-    fontSize: 24,
+  welcomeText: {
+    color: 'black',
+    fontSize: 35,
     fontWeight: 'bold',
-    marginVertical: 10,
+    textAlign: 'left', 
+    marginTop: 20,
+    marginBottom: 50,
+    marginLeft: 15, 
   },
-  bio: {
-    textAlign: 'center',
-    marginBottom: 20,
+  usernameText: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'left', 
+    marginLeft: 15, 
   },
-  textInput: {
-    height: 40,
+  passwordText: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'left', 
+    marginLeft: 15,
+    marginTop: 30, 
+  },
+  input: {
+    height: 50,
     borderColor: 'gray',
     borderWidth: 1,
-    marginBottom: 20,
-    paddingHorizontal: 10,
-    width: '100%',
-    borderRadius: 10,
+    marginLeft: 15,
+    marginRight: 15,
+    padding: 15,
+    borderRadius: 12,
   },
-  footer: {
-    marginTop: 20,
-  },
+  signInText: {
+    color:  'white',
+  }
 });
 
-export default AboutMeComponent;
+export default App;
